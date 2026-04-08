@@ -1,8 +1,11 @@
-# Pi runtime/state files
-/dotfiles/pi/.pi/agent/auth.json
-/dotfiles/pi/.pi/agent/pi-crash.log
-/dotfiles/pi/.pi/agent/run-history.jsonl
-/dotfiles/pi/.pi/agent/sessions/
+# Pi: allowlist only selected synced files/folders
+/dotfiles/pi/.pi/agent/*
+!/dotfiles/pi/.pi/agent/settings.json
+!/dotfiles/pi/.pi/agent/powerline.json
+!/dotfiles/pi/.pi/agent/git/
+!/dotfiles/pi/.pi/agent/git/**
+!/dotfiles/pi/.pi/agent/extensions/
+!/dotfiles/pi/.pi/agent/extensions/**
 /dotfiles/pi/.pi/cache/
 
 # Local wezterm-only files
