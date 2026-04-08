@@ -1,0 +1,31 @@
+{
+  "lastChangelogVersion": "0.66.0",
+  "editorPaddingX": 1,
+  "theme": "ansi-dark",
+  "steeringMode": "one-at-a-time",
+  "followUpMode": "one-at-a-time",
+  "transport": "websocket",
+  "treeFilterMode": "user-only",
+  "packages": [
+    "git:github.com/leblancfg/pi-ansi-themes",
+    "npm:pi-vitals",
+    "npm:checkpoint-pi",
+    "npm:pi-subagents",
+    "npm:pi-markdown-preview"
+  ],
+  "hideThinkingBlock": true,
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.3-codex",
+  "showHardwareCursor": false,
+  "enabledModels": [
+    "anthropic/claude-opus-4-6",
+    "anthropic/claude-sonnet-4-6",
+    "openai-codex/gpt-5.3-codex",
+    "openai-codex/gpt-5.4-mini"
+  ],
+  "autocompleteMaxVisible": 5,
+  "collapseChangelog": true,
+  "doubleEscapeAction": "tree",
+  "quietStartup": false,
+  "defaultThinkingLevel": "medium"
+}

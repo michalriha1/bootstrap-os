@@ -1,0 +1,29 @@
+{
+  "icons": {
+    "contextPct": "⛁"
+  },
+  "colors": {
+    "pi": "#ca9ee6",
+    "model": "#8caaee",
+    "path": "#81c8be",
+    "git": "#a6d189",
+    "gitDirty": "#e5c890",
+    "gitClean": "#a6d189",
+    "thinking": "#949cbb",
+    "context": "#a5adce",
+    "contextWarn": "#ef9f76",
+    "contextError": "#e78284",
+    "cost": "#c6d0f5",
+    "tokens": "#949cbb",
+    "separator": "#737994"
+  },
+  "leftSegments": [
+    "path",
+    "git"
+  ],
+  "rightSegments": [
+    "context_pct",
+    "model",
+    "thinking"
+  ]
+}
