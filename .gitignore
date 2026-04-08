@@ -3,6 +3,7 @@
 /dotfiles/pi/.pi/agent/pi-crash.log
 /dotfiles/pi/.pi/agent/run-history.jsonl
 /dotfiles/pi/.pi/agent/sessions/
+/dotfiles/pi/.pi/cache/
 
 # Local wezterm-only files
 /dotfiles/wezterm/.config/wezterm/.claude/
