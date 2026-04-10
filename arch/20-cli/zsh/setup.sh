@@ -49,12 +49,7 @@ fi
 # configs
 dotfiles_dir="${BOOTSTRAP_ROOT}/../dotfiles"
 
-zshrc_target="${HOME}/.zshrc"
-if [[ -e "$zshrc_target" && ! -L "$zshrc_target" ]]; then
-    info "Existing .zshrc found, renaming to .zshrc.bak..."
-    mv "$zshrc_target" "${zshrc_target}.bak"
-    success "Renamed .zshrc to .zshrc.bak"
-fi
+backup_stow_conflicts "$dotfiles_dir" "$HOME" zsh
 
 info "Stowing zsh config..."
 stow --dir "$dotfiles_dir" --target "$HOME" --restow zsh

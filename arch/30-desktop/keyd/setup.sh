@@ -8,6 +8,8 @@ dotfiles_dir="${BOOTSTRAP_ROOT}/../dotfiles"
 
 sudo mkdir -p /etc/keyd
 
+backup_stow_conflicts "$dotfiles_dir" "/" sudo keyd
+
 info "Stowing keyd config..."
 sudo stow --dir "$dotfiles_dir" --target / --restow keyd
 success "Keyd config stowed"

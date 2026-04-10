@@ -81,6 +81,52 @@ backup_file_copy() {
     info "Backed up $path -> ${path}.bak (keeping $BACKUP_KEEP)"
 }
 
+# For each file/symlink in one or more stow packages, back up an existing
+# non-symlink target path to avoid stow conflicts.
+# Usage:
+#   backup_stow_conflicts <dotfiles_dir> <target_dir> [sudo] <package...>
+backup_stow_conflicts() {
+    local dotfiles_dir="$1"
+    local target_dir="$2"
+    shift 2
+
+    local use_sudo=""
+    if [[ "${1:-}" == "sudo" ]]; then
+        use_sudo="sudo"
+        shift
+    fi
+
+    local package
+    for package in "$@"; do
+        local pkg_dir="${dotfiles_dir}/${package}"
+        if [[ ! -d "$pkg_dir" ]]; then
+            warn "Stow package not found, skipping conflict check: $package"
+            continue
+        fi
+
+        while IFS= read -r -d '' src; do
+            local rel="${src#${pkg_dir}/}"
+            local target_path="${target_dir}/${rel}"
+
+            if [[ -L "$target_path" ]]; then
+                continue
+            fi
+
+            if [[ "$use_sudo" == "sudo" ]]; then
+                if sudo test -e "$target_path"; then
+                    info "Existing file blocks stow target, backing up: $target_path"
+                    backup_path "$target_path" "sudo"
+                fi
+            else
+                if [[ -e "$target_path" ]]; then
+                    info "Existing file blocks stow target, backing up: $target_path"
+                    backup_path "$target_path"
+                fi
+            fi
+        done < <(find "$pkg_dir" -mindepth 1 \( -type f -o -type l \) -print0)
+    done
+}
+
 # Installs packages via paru. Assumes paru is already installed
 # (the `paru` module runs early in bootstrap.sh). The `base` module
 # installs its prerequisites with raw `sudo pacman` directly, because

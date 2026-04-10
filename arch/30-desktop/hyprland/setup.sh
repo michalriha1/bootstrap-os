@@ -12,6 +12,8 @@ install_packages \
 
 dotfiles_dir="${BOOTSTRAP_ROOT}/../dotfiles"
 
+backup_stow_conflicts "$dotfiles_dir" "$HOME" hypr local-bin
+
 info "Stowing Hyprland config and helper scripts..."
 stow --dir "$dotfiles_dir" --target "$HOME" --restow hypr local-bin
 chmod +x "${HOME}/.local/bin/os-launch-or-focus"

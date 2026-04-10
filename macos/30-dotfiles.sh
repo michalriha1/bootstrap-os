@@ -29,6 +29,19 @@ run_dotfiles() {
     return
   fi
 
+  local src rel target backup_path
+  for pkg in "${packages[@]}"; do
+    while IFS= read -r -d '' src; do
+      rel="${src#${DOTFILES_DIR}/${pkg}/}"
+      target="${HOME}/${rel}"
+      if [[ -e "$target" && ! -L "$target" ]]; then
+        backup_path="${target}.bak"
+        warn "Existing file blocks stow target, moving to: $backup_path"
+        mv "$target" "$backup_path"
+      fi
+    done < <(find "${DOTFILES_DIR}/${pkg}" -mindepth 1 \( -type f -o -type l \) -print0)
+  done
+
   log "Stowing selected dotfiles packages from $DOTFILES_DIR"
   (
     cd "$DOTFILES_DIR"
