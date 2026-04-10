@@ -28,5 +28,13 @@ run_macos() {
   defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
   defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
+  # Disable Spotlight shortcuts so Raycast can own Cmd+Space
+  local symbolic_hotkeys_plist="$HOME/Library/Preferences/com.apple.symbolichotkeys.plist"
+  /usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:64:enabled false" "$symbolic_hotkeys_plist" 2>/dev/null || true
+  /usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:65:enabled false" "$symbolic_hotkeys_plist" 2>/dev/null || true
+
+  # Set Raycast global hotkey to Cmd+Space (keycode 49)
+  defaults write com.raycast.macos raycastGlobalHotkey -string "Command-49" 2>/dev/null || true
+
   killall Finder Dock SystemUIServer 2>/dev/null || true
 }
